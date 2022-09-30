@@ -174,20 +174,20 @@ variable "contacts_email" {
   type        = string
 }
 
-variable "contacts_name" {
-  description = "(Optional) Name of the contact."
-  type        = string
-  default     = null
-}
+# variable "contacts_name" {
+#   description = "(Optional) Name of the contact."
+#   type        = string
+#   default     = null
+# }
 
-variable "contacts_phone" {
-  description = "(Optional) Phone number of the contact."
-  type        = string
-  default     = null
-}
+# variable "contacts_phone" {
+#   description = "(Optional) Phone number of the contact."
+#   type        = string
+#   default     = null
+# }
 
-variable "tags" {
-  description = "(Optional) A mapping of tags to assign to the resource."
-  type        = map(string)
-  default     = null # {}
-}
+# variable "tags" {
+#   description = "(Optional) A mapping of tags to assign to the resource."
+#   type        = map(string)
+#   default     = null # {}
+# }
