@@ -128,13 +128,13 @@ variable "network_acls_default_action" {
 variable "network_acls_ip_rules" {
   description = "(Optional) One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault."
   type        = list(string)
-  default     = []
+  default     = null
 }
 
 variable "network_acls_virtual_network_subnet_ids" {
   description = "(Optional) One or more Subnet IDs which should be able to access this Key Vault."
   type        = list(string)
-  default     = []
+  default     = null
 }
 
 # azure-keyvault-no-purge
