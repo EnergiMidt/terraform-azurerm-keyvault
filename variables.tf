@@ -50,11 +50,23 @@ variable "sku_name" {
 }
 
 variable "tenant_id" {
-  default  = "00000000-0000-0000-0000-000000000000"
-  nullable = false
-  type     = string
+  description = "(Required) The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Changing this forces a new resource to be created."
+  default     = "00000000-0000-0000-0000-000000000000"
+  nullable    = false
+  type        = string
   validation {
     condition     = can(regex("^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$", var.tenant_id))
+    error_message = "The tenant_id value must be a valid globally unique identifier (GUID)."
+  }
+}
+
+variable "object_id" {
+  description = "(Required) The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created."
+  default     = "00000000-0000-0000-0000-000000000000"
+  nullable    = false
+  type        = string
+  validation {
+    condition     = can(regex("^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$", var.object_id))
     error_message = "The tenant_id value must be a valid globally unique identifier (GUID)."
   }
 }
