@@ -155,22 +155,28 @@ variable "soft_delete_retention_days" {
   default     = 90
 }
 
-variable "contacts_email" {
-  description = "(Required) E-mail address of the contact."
-  type        = string
-}
+# TODO: Fix forbidden access.
+# Status=403 Code="Forbidden" Message="The user, group or application 'appid=***;oid=00000000-0000-0000-0000-000000000000;numgroups=0;iss=https://sts.windows.net/***/' does not have certificates managecontacts permission on key vault 'keyvault-name;location=location'.
+# variable "contacts_email" {
+#   description = "(Required) E-mail address of the contact."
+#   type        = string
+# }
 
-variable "contacts_name" {
-  description = "(Optional) Name of the contact."
-  type        = string
-  default     = null
-}
+# TODO: Fix forbidden access.
+# Status=403 Code="Forbidden" Message="The user, group or application 'appid=***;oid=00000000-0000-0000-0000-000000000000;numgroups=0;iss=https://sts.windows.net/***/' does not have certificates managecontacts permission on key vault 'keyvault-name;location=location'.
+# variable "contacts_name" {
+#   description = "(Optional) Name of the contact."
+#   type        = string
+#   default     = null
+# }
 
-variable "contacts_phone" {
-  description = "(Optional) Phone number of the contact."
-  type        = string
-  default     = null
-}
+# TODO: Fix forbidden access.
+# Status=403 Code="Forbidden" Message="The user, group or application 'appid=***;oid=00000000-0000-0000-0000-000000000000;numgroups=0;iss=https://sts.windows.net/***/' does not have certificates managecontacts permission on key vault 'keyvault-name;location=location'.
+# variable "contacts_phone" {
+#   description = "(Optional) Phone number of the contact."
+#   type        = string
+#   default     = null
+# }
 
 variable "tags" {
   description = "(Optional) A mapping of tags to assign to the resource."
