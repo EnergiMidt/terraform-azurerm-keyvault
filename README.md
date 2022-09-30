@@ -51,6 +51,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_contacts_email"></a> [contacts\_email](#input\_contacts\_email) | (Required) E-mail address of the contact. | `string` | n/a | yes |
+| <a name="input_contacts_name"></a> [contacts\_name](#input\_contacts\_name) | (Optional) Name of the contact. | `string` | `null` | no |
+| <a name="input_contacts_phone"></a> [contacts\_phone](#input\_contacts\_phone) | (Optional) Phone number of the contact. | `string` | `null` | no |
 | <a name="input_enable_rbac_authorization"></a> [enable\_rbac\_authorization](#input\_enable\_rbac\_authorization) | (Optional) Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_enabled_for_deployment"></a> [enabled\_for\_deployment](#input\_enabled\_for\_deployment) | (Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_enabled_for_disk_encryption"></a> [enabled\_for\_disk\_encryption](#input\_enabled\_for\_disk\_encryption) | (Optional) Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to `false`. | `bool` | `false` | no |
