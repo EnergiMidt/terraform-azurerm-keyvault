@@ -29,13 +29,11 @@ resource "azurerm_key_vault" "key_vault" {
   public_network_access_enabled = var.public_network_access_enabled
   soft_delete_retention_days    = var.soft_delete_retention_days
 
-  # TODO: Fix forbidden access.
-  # Status=403 Code="Forbidden" Message="The user, group or application 'appid=***;oid=00000000-0000-0000-0000-000000000000;numgroups=0;iss=https://sts.windows.net/***/' does not have certificates managecontacts permission on key vault 'keyvault-name;location=location'.
-  # contact {
-  #   email = var.contacts_email
-  #   name  = var.contacts_name
-  #   phone = var.contacts_phone
-  # }
+  contact {
+    email = var.contacts_email
+    name  = var.contacts_name
+    phone = var.contacts_phone
+  }
 
   tags = var.tags
 }
