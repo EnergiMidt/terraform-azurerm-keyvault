@@ -19,7 +19,10 @@ resource "azurerm_key_vault" "key_vault" {
   enable_rbac_authorization       = var.enable_rbac_authorization
 
   network_acls {
-    bypass                     = var.network_acls_bypass
+    bypass = var.network_acls_bypass
+    # checkov:skip=CKV_AZURE_109: The `default_action` variable defaults to Allow.
+    # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
+    # tfsec:ignore:azure-keyvault-specify-network-acl
     default_action             = var.network_acls_default_action
     ip_rules                   = var.network_acls_ip_rules
     virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids

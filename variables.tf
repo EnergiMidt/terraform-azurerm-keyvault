@@ -111,12 +111,14 @@ variable "network_acls_bypass" {
   }
 }
 
-# azure-keyvault-specify-network-acl
+# checkov:skip=CKV_AZURE_109: The `default_action` variable defaults to Allow.
+# https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
+# tfsec:ignore:azure-keyvault-specify-network-acl
 # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/specify-network-acl/
 variable "network_acls_default_action" {
-  description = "(Required) The Default Action to use when no rules match from `ip_rules` / `virtual_network_subnet_ids`. Possible values are `Allow` and `Deny`. Upstream defaults to `Allow`. Defaults to `Deny` in this module."
+  description = "(Required) The Default Action to use when no rules match from `ip_rules` / `virtual_network_subnet_ids`. Possible values are `Allow` and `Deny`. Defaults to `Allow`."
   type        = string
-  default     = "Deny"
+  default     = "Allow"
   validation {
     condition     = can(regex("^(Allow|Deny)$", var.network_acls_default_action))
     error_message = "Possible values are `Allow` and `Deny`."
