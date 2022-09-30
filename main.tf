@@ -30,11 +30,11 @@ resource "azurerm_key_vault" "key_vault" {
   public_network_access_enabled = var.public_network_access_enabled
   soft_delete_retention_days    = var.soft_delete_retention_days
 
-  contact {
-    email = var.contacts_email
-    name  = var.contacts_name
-    phone = var.contacts_phone
-  }
+  # contact {
+  #   email = var.contacts_email
+  #   name  = var.contacts_name
+  #   phone = var.contacts_phone
+  # }
 
   tags = var.tags
 }
