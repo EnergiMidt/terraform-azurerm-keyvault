@@ -169,10 +169,10 @@ variable "soft_delete_retention_days" {
   default     = 90
 }
 
-variable "contacts_email" {
-  description = "(Required) E-mail address of the contact."
-  type        = string
-}
+# variable "contacts_email" {
+#   description = "(Required) E-mail address of the contact."
+#   type        = string
+# }
 
 # variable "contacts_name" {
 #   description = "(Optional) Name of the contact."
@@ -186,8 +186,8 @@ variable "contacts_email" {
 #   default     = null
 # }
 
-# variable "tags" {
-#   description = "(Optional) A mapping of tags to assign to the resource."
-#   type        = map(string)
-#   default     = null # {}
-# }
+variable "tags" {
+  description = "(Optional) A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = null # {}
+}
