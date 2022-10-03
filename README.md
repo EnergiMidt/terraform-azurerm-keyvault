@@ -63,7 +63,7 @@ No modules.
 | <a name="input_object_id"></a> [object\_id](#input\_object\_id) | (Required) The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created. | `string` | `"00000000-0000-0000-0000-000000000000"` | no |
 | <a name="input_override_name"></a> [override\_name](#input\_override\_name) | (Optional) Override the name of the resource. Under normal circumstances, it should not be used. | `string` | `""` | no |
 | <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Whether public network access is allowed for this Key Vault. Defaults to `true`. | `bool` | `true` | no |
-| <a name="input_purge_protection_enabled"></a> [purge\_protection\_enabled](#input\_purge\_protection\_enabled) | (Optional) Is Purge Protection enabled for this Key Vault? Upstream defaults to `false`. Defaults to `true` in this module. | `bool` | `true` | no |
+| <a name="input_purge_protection_enabled"></a> [purge\_protection\_enabled](#input\_purge\_protection\_enabled) | (Optional) Is Purge Protection enabled for this Key Vault? Upstream defaults to `false`. Defaults to `true` in this module. | `bool` | `false` | no |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | (Required) The resource group in which the Azure Key Vault is created. | `any` | n/a | yes |
 | <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | (Optional) The Name of the SKU used for this Key Vault. Possible values are `standard` and `premium`. | `string` | `"standard"` | no |
 | <a name="input_soft_delete_retention_days"></a> [soft\_delete\_retention\_days](#input\_soft\_delete\_retention\_days) | (Optional) The number of days that items should be retained for once soft-deleted. This value can be between `7` and `90` (the default) days. | `number` | `90` | no |
@@ -74,7 +74,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_azurerm_key_vault"></a> [azurerm\_key\_vault](#output\_azurerm\_key\_vault) | n/a |
+| <a name="output_azurerm_key_vault"></a> [azurerm\_key\_vault](#output\_azurerm\_key\_vault) | The Azure Key Vault resource. |
 <!-- END_TF_DOCS -->
 
 [1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault
