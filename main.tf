@@ -26,15 +26,15 @@ resource "azurerm_key_vault" "key_vault" {
     virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids
   }
 
+  # https://docs.bridgecrew.io/docs/ensure-the-key-vault-is-recoverable
+  # checkov:skip=CKV_AZURE_42: The `purge_protection_enabled` variable defaults to false.
+  # https://docs.bridgecrew.io/docs/ensure-that-key-vault-enables-purge-protection
+  # checkov:skip=CKV_AZURE_110: The `purge_protection_enabled` variable defaults to false.
+  # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/no-purge/
+  # tfsec:ignore:azure-keyvault-no-purge
   purge_protection_enabled      = var.purge_protection_enabled
   public_network_access_enabled = var.public_network_access_enabled
   soft_delete_retention_days    = var.soft_delete_retention_days
-
-  # contact {
-  #   email = var.contacts_email
-  #   name  = var.contacts_name
-  #   phone = var.contacts_phone
-  # }
 
   tags = var.tags
 }

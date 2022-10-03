@@ -149,12 +149,16 @@ variable "network_acls_virtual_network_subnet_ids" {
   default     = null
 }
 
-# azure-keyvault-no-purge
+# https://docs.bridgecrew.io/docs/ensure-the-key-vault-is-recoverable
+# checkov:skip=CKV_AZURE_42: The `purge_protection_enabled` variable defaults to false.
+# https://docs.bridgecrew.io/docs/ensure-that-key-vault-enables-purge-protection
+# checkov:skip=CKV_AZURE_110: The `purge_protection_enabled` variable defaults to false.
 # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/no-purge/
+# tfsec:ignore:azure-keyvault-no-purge
 variable "purge_protection_enabled" {
   description = "(Optional) Is Purge Protection enabled for this Key Vault? Upstream defaults to `false`. Defaults to `true` in this module."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "public_network_access_enabled" {
@@ -168,23 +172,6 @@ variable "soft_delete_retention_days" {
   type        = number
   default     = 90
 }
-
-# variable "contacts_email" {
-#   description = "(Required) E-mail address of the contact."
-#   type        = string
-# }
-
-# variable "contacts_name" {
-#   description = "(Optional) Name of the contact."
-#   type        = string
-#   default     = null
-# }
-
-# variable "contacts_phone" {
-#   description = "(Optional) Phone number of the contact."
-#   type        = string
-#   default     = null
-# }
 
 variable "tags" {
   description = "(Optional) A mapping of tags to assign to the resource."
