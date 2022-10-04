@@ -1,5 +1,6 @@
 variable "environment" {
   description = "(Required) The name of the environment."
+  default     = null
   type        = string
   validation {
     condition = contains([
@@ -12,30 +13,36 @@ variable "environment" {
 }
 
 variable "name" {
-  description = "(Required) The name of the Azure Key Vault."
+  description = "(Required) The name which should be used for this resource. Changing this forces a new resource to be created."
   type        = string
 }
 
 variable "override_name" {
   description = "(Optional) Override the name of the resource. Under normal circumstances, it should not be used."
-  default     = ""
+  default     = null
+  type        = string
+}
+
+variable "override_location" {
+  description = "(Optional) Override the location of the resource. Under normal circumstances, it should not be used."
+  default     = null
   type        = string
 }
 
 variable "resource_group" {
-  description = "(Required) The resource group in which the Azure Key Vault is created."
+  description = "(Required) The resource group where this resource should exist."
   type        = any
 }
 
-# This upstream variable is replaced by the use of `resource_group` variable.
+# This `resource_group_name` variable is replaced by the use of `resource_group` variable.
 # variable "resource_group_name" {
-#   description = "(Required) The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created."
+#   description = "(Required) The name of the resource group where the resource should exist. Changing this forces a new resource to be created."
 #   type        = string
 # }
 
-# This upstream variable is replaced by the use of `resource_group` variable.
+# This `location` variable is replaced by the use of `resource_group` variable.
 # variable "location" {
-#   description = "(Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+#   description = "(Required) The location where the resource should exist. Changing this forces a new resource to be created."
 #   type        = string
 # }
 
@@ -176,5 +183,5 @@ variable "soft_delete_retention_days" {
 variable "tags" {
   description = "(Optional) A mapping of tags to assign to the resource."
   type        = map(string)
-  default     = null # {}
+  default     = {}
 }
