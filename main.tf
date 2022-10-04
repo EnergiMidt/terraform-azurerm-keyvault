@@ -1,10 +1,11 @@
 locals {
   name = var.override_name == null ? "${var.system_name}-${lower(var.environment)}-kv" : var.override_name
+  location = var.override_location == null ? var.resource_group.location : var.override_location
 }
 
 resource "azurerm_key_vault" "key_vault" {
   name                = local.name
-  location            = var.resource_group.location
+  location            = local.location
   resource_group_name = var.resource_group.name
 
   sku_name  = var.sku_name
