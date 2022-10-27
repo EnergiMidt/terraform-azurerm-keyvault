@@ -11,32 +11,6 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name  = var.sku_name
   tenant_id = var.tenant_id
 
-  // access_policy
-  enabled_for_deployment          = var.enabled_for_deployment
-  enabled_for_disk_encryption     = var.enabled_for_disk_encryption
-  enabled_for_template_deployment = var.enabled_for_template_deployment
-  enable_rbac_authorization       = var.enable_rbac_authorization
-
-  network_acls {
-    bypass = var.network_acls_bypass
-    # checkov:skip=CKV_AZURE_109: The `default_action` variable defaults to Allow.
-    # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
-    # tfsec:ignore:azure-keyvault-specify-network-acl
-    default_action             = var.network_acls_default_action
-    ip_rules                   = var.network_acls_ip_rules
-    virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids
-  }
-
-  # https://docs.bridgecrew.io/docs/ensure-the-key-vault-is-recoverable
-  # checkov:skip=CKV_AZURE_42: The `purge_protection_enabled` variable defaults to false.
-  # https://docs.bridgecrew.io/docs/ensure-that-key-vault-enables-purge-protection
-  # checkov:skip=CKV_AZURE_110: The `purge_protection_enabled` variable defaults to false.
-  # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/no-purge/
-  # tfsec:ignore:azure-keyvault-no-purge
-  purge_protection_enabled      = var.purge_protection_enabled
-  public_network_access_enabled = var.public_network_access_enabled
-  soft_delete_retention_days    = var.soft_delete_retention_days
-
   dynamic "access_policy" {
     for_each = try(var.configuration.access_policy, null) != null ? [var.configuration.access_policy] : []
     content {
@@ -53,5 +27,41 @@ resource "azurerm_key_vault" "key_vault" {
     }
   } # (Optional) A list of up to 16 objects describing access policies, as described above.
 
-  tags = var.tags
+  enabled_for_deployment          = try(var.enabled_for_deployment, null)
+  enabled_for_disk_encryption     = try(var.enabled_for_disk_encryption, null)
+  enabled_for_template_deployment = try(var.enabled_for_template_deployment, null)
+  enable_rbac_authorization       = try(var.enable_rbac_authorization, null)
+
+  dynamic "network_acls" {
+    for_each = try(var.configuration.network_acls, null) != null ? [var.configuration.network_acls] : []
+    content {
+      bypass                     = var.configuration.network_acls.bypass
+      default_action             = var.configuration.network_acls.default_action
+      ip_rules                   = try(var.configuration.network_acls.ip_rules, null)
+      virtual_network_subnet_ids = try(var.configuration.network_acls.virtual_network_subnet_ids, null)
+    }
+  }
+
+  # network_acls {
+  #   bypass = var.network_acls_bypass
+  #   # checkov:skip=CKV_AZURE_109: The `default_action` variable defaults to Allow.
+  #   # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
+  #   # tfsec:ignore:azure-keyvault-specify-network-acl
+  #   default_action             = var.network_acls_default_action
+  #   ip_rules                   = var.network_acls_ip_rules
+  #   virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids
+  # }
+
+  # https://docs.bridgecrew.io/docs/ensure-the-key-vault-is-recoverable
+  # checkov:skip=CKV_AZURE_42: The `purge_protection_enabled` variable defaults to false.
+  # https://docs.bridgecrew.io/docs/ensure-that-key-vault-enables-purge-protection
+  # checkov:skip=CKV_AZURE_110: The `purge_protection_enabled` variable defaults to false.
+  # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/no-purge/
+  # tfsec:ignore:azure-keyvault-no-purge
+
+  purge_protection_enabled      = try(var.purge_protection_enabled, null)
+  public_network_access_enabled = try(var.public_network_access_enabled, null)
+  soft_delete_retention_days    = try(var.soft_delete_retention_days, null)
+
+  tags = try(var.tags, null)
 }

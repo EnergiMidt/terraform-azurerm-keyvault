@@ -110,7 +110,7 @@ variable "tenant_id" {
 variable "enabled_for_deployment" {
   description = "(Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to `false`."
   type        = bool
-  default     = false
+  # default     = false
 }
 
 variable "enabled_for_disk_encryption" {
@@ -131,41 +131,42 @@ variable "enable_rbac_authorization" {
   default     = false
 }
 
-variable "network_acls_bypass" {
-  description = "(Required) Specifies which traffic can bypass the network rules. Possible values are `AzureServices` and `None`."
-  type        = string
-  default     = "AzureServices"
-  validation {
-    condition     = can(regex("^(AzureServices|None)$", var.network_acls_bypass))
-    error_message = "Possible values are `AzureServices` and `None`."
-  }
-}
+# variable "network_acls_bypass" {
+#   description = "(Required) Specifies which traffic can bypass the network rules. Possible values are `AzureServices` and `None`."
+#   type        = string
+#   default     = "AzureServices"
+#   validation {
+#     condition     = can(regex("^(AzureServices|None)$", var.network_acls_bypass))
+#     error_message = "Possible values are `AzureServices` and `None`."
+#   }
+# }
 
 # checkov:skip=CKV_AZURE_109: The `default_action` variable defaults to Allow.
 # https://docs.bridgecrew.io/docs/ensure-azure-cosmosdb-has-local-authentication-disabled
 # tfsec:ignore:azure-keyvault-specify-network-acl
 # https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/specify-network-acl/
-variable "network_acls_default_action" {
-  description = "(Required) The Default Action to use when no rules match from `ip_rules` / `virtual_network_subnet_ids`. Possible values are `Allow` and `Deny`. Defaults to `Allow`."
-  type        = string
-  default     = "Allow"
-  validation {
-    condition     = can(regex("^(Allow|Deny)$", var.network_acls_default_action))
-    error_message = "Possible values are `Allow` and `Deny`."
-  }
-}
 
-variable "network_acls_ip_rules" {
-  description = "(Optional) One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault."
-  type        = list(string)
-  default     = null
-}
+# variable "network_acls_default_action" {
+#   description = "(Required) The Default Action to use when no rules match from `ip_rules` / `virtual_network_subnet_ids`. Possible values are `Allow` and `Deny`. Defaults to `Allow`."
+#   type        = string
+#   default     = "Allow"
+#   validation {
+#     condition     = can(regex("^(Allow|Deny)$", var.network_acls_default_action))
+#     error_message = "Possible values are `Allow` and `Deny`."
+#   }
+# }
 
-variable "network_acls_virtual_network_subnet_ids" {
-  description = "(Optional) One or more Subnet IDs which should be able to access this Key Vault."
-  type        = list(string)
-  default     = null
-}
+# variable "network_acls_ip_rules" {
+#   description = "(Optional) One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault."
+#   type        = list(string)
+#   default     = null
+# }
+
+# variable "network_acls_virtual_network_subnet_ids" {
+#   description = "(Optional) One or more Subnet IDs which should be able to access this Key Vault."
+#   type        = list(string)
+#   default     = null
+# }
 
 # https://docs.bridgecrew.io/docs/ensure-the-key-vault-is-recoverable
 # checkov:skip=CKV_AZURE_42: The `purge_protection_enabled` variable defaults to false.
