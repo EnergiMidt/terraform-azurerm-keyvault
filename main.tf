@@ -55,14 +55,3 @@ resource "azurerm_key_vault" "key_vault" {
 
   tags = var.tags
 }
-
-resource "null_resource" "terraform-debug" {
-  provisioner "local-exec" {
-    command = "echo $VARIABLE1 >> debug.txt ; echo $VARIABLE2 >> debug.txt"
-
-    environment = {
-        VARIABLE1 = jsonencode(var.configuration)
-        VARIABLE2 = jsonencode(var.configuration.access_policy)
-    }
-  }
-}
