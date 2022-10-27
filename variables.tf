@@ -11,6 +11,12 @@ variable "environment" {
   }
 }
 
+variable "configuration" {
+  description = "(Optional) The configuration for block type arguments."
+  type        = any
+  default     = null
+}
+
 # This `name` variable is replaced by the use of `system_name` and `environment` variables.
 # variable "name" {
 #   description = "(Required) The name which should be used for this resource. Changing this forces a new resource to be created."
