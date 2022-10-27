@@ -18,9 +18,9 @@ resource "azurerm_key_vault" "key_vault" {
       object_id = try(var.configuration.access_policy.object_id, null)
 
       certificate_permissions = try(var.configuration.access_policy.certificate_permissions, null)
-      key_permissions = try(var.configuration.access_policy.key_permissions, null)
-      secret_permissions = try(var.configuration.access_policy.secret_permissions, null)
-      storage_permissions = try(var.configuration.access_policy.storage_permissions, null)
+      key_permissions         = try(var.configuration.access_policy.key_permissions, null)
+      secret_permissions      = try(var.configuration.access_policy.secret_permissions, null)
+      storage_permissions     = try(var.configuration.access_policy.storage_permissions, null)
     }
   } # (Optional) A list of up to 16 objects describing access policies, as described above.
 
@@ -58,7 +58,7 @@ resource "azurerm_key_vault" "key_vault" {
     for_each = try(var.configuration.contact, null) != null ? [var.configuration.contact] : []
     content {
       email = var.configuration.email
-      name = try(var.configuration.name, null)
+      name  = try(var.configuration.name, null)
       phone = try(var.configuration.phone, null)
     }
   }
