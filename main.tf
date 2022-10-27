@@ -57,9 +57,9 @@ resource "azurerm_key_vault" "key_vault" {
   dynamic "contact" {
     for_each = try(var.configuration.contact, null) != null ? [var.configuration.contact] : []
     content {
-      email = var.configuration.email
-      name  = try(var.configuration.name, null)
-      phone = try(var.configuration.phone, null)
+      email = var.configuration.contact.email
+      name  = try(var.configuration.contact.name, null)
+      phone = try(var.configuration.contact.phone, null)
     }
   }
 
