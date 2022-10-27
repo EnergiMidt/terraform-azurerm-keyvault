@@ -10,6 +10,7 @@ resource "azurerm_key_vault" "key_vault" {
 
   sku_name  = var.sku_name
   tenant_id = var.tenant_id
+
   // access_policy
   enabled_for_deployment          = var.enabled_for_deployment
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
@@ -39,8 +40,8 @@ resource "azurerm_key_vault" "key_vault" {
   dynamic "access_policy" {
     for_each = try(var.configuration.access_policy, null) != null ? [var.configuration.access_policy] : []
     content {
-      tenant_id = var.tenant_id
-      object_id = var.object_id
+      tenant_id = try(var.configuration.access_policy.tenant_id, null)
+      object_id = try(var.configuration.access_policy.object_id, null)
 
       certificate_permissions = try(var.configuration.access_policy.certificate_permissions, null)
 
@@ -54,43 +55,3 @@ resource "azurerm_key_vault" "key_vault" {
 
   tags = var.tags
 }
-
-# resource "azurerm_key_vault_access_policy" "access_policy" {
-#   key_vault_id = azurerm_key_vault.key_vault.id
-#   tenant_id    = var.tenant_id
-#   object_id    = var.object_id
-
-#   key_permissions = [
-#     # "Backup",
-#     # "Create",
-#     # "Decrypt",
-#     # "Delete",
-#     # "Encrypt",
-#     # "Get",
-#     # "Import",
-#     # "List",
-#     # "Purge",
-#     # "Recover",
-#     # "Restore",
-#     # "Sign",
-#     # "UnwrapKey",
-#     # "Update",
-#     # "Verify",
-#     # "WrapKey",
-#     # "Release",
-#     # "Rotate",
-#     # "GetRotationPolicy",
-#     # "SetRotationPolicy",
-#   ]
-
-#   secret_permissions = [
-#     "Backup",
-#     "Delete",
-#     "Get",
-#     "List",
-#     "Purge",
-#     "Recover",
-#     "Restore",
-#     "Set",
-#   ]
-# }
