@@ -110,7 +110,7 @@ variable "tenant_id" {
 variable "enabled_for_deployment" {
   description = "(Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to `false`."
   type        = bool
-  # default     = false
+  default     = false
 }
 
 variable "enabled_for_disk_encryption" {
