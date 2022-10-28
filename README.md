@@ -2,6 +2,8 @@
 
 Manages a Key Vault.
 
+Key Vault's [soft-delete feature](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview) allows recovery of the deleted vaults and deleted key vault objects (for example, keys, secrets, certificates), known as soft-delete. In [February 2025](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-change), Microsoft will enable soft-delete protection on all key vaults, and users will no longer be able to opt out of or turn off soft-delete.
+
 ## Getting Started
 
 - Format and validate Terraform code before commit.
