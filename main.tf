@@ -3,6 +3,15 @@ locals {
   location = var.override_location == null ? var.resource_group.location : var.override_location
 }
 
+# tfsec: azure-keyvault-no-purge
+# https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/no-purge/
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled
+
+# tfsec: azure-keyvault-specify-network-acl
+# https://aquasecurity.github.io/tfsec/v1.28.0/checks/azure/keyvault/specify-network-acl/
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#network_acls
+
+# tfsec:ignore:azure-keyvault-no-purge tfsec:ignore:azure-keyvault-specify-network-acl
 resource "azurerm_key_vault" "key_vault" {
   name                = local.name
   location            = local.location
