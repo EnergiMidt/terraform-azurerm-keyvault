@@ -20,18 +20,23 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name  = var.sku_name
   tenant_id = var.tenant_id
 
-  dynamic "access_policy" {
-    for_each = try(var.configuration.access_policy, null) != null ? [var.configuration.access_policy] : []
-    content {
-      tenant_id = try(var.configuration.access_policy.tenant_id, null)
-      object_id = try(var.configuration.access_policy.object_id, null)
+  # Use separate `azurerm_key_vault_access_policy` resource instead of inline `access_policy`.
+  #
+  # Since access_policy can be configured both inline and via the separate `azurerm_key_vault_access_policy` resource,
+  # we have to explicitly set it to empty slice ([]) to remove it.
+  #
+  # dynamic "access_policy" {
+  #   for_each = try(var.configuration.access_policy, null) != null ? [var.configuration.access_policy] : []
+  #   content {
+  #     tenant_id = try(var.configuration.access_policy.tenant_id, null)
+  #     object_id = try(var.configuration.access_policy.object_id, null)
 
-      certificate_permissions = try(var.configuration.access_policy.certificate_permissions, null)
-      key_permissions         = try(var.configuration.access_policy.key_permissions, null)
-      secret_permissions      = try(var.configuration.access_policy.secret_permissions, null)
-      storage_permissions     = try(var.configuration.access_policy.storage_permissions, null)
-    }
-  } # (Optional) A list of up to 16 objects describing access policies, as described above.
+  #     certificate_permissions = try(var.configuration.access_policy.certificate_permissions, null)
+  #     key_permissions         = try(var.configuration.access_policy.key_permissions, null)
+  #     secret_permissions      = try(var.configuration.access_policy.secret_permissions, null)
+  #     storage_permissions     = try(var.configuration.access_policy.storage_permissions, null)
+  #   }
+  # } # (Optional) A list of up to 16 objects describing access policies, as described above.
 
   enabled_for_deployment          = try(var.enabled_for_deployment, null)
   enabled_for_disk_encryption     = try(var.enabled_for_disk_encryption, null)
