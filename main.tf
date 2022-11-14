@@ -20,7 +20,7 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name  = var.sku_name
   tenant_id = var.tenant_id
 
-  # Use separate `azurerm_key_vault_access_policy` resource instead of inline `access_policy`.
+  # Use separate `azurerm_key_vault_access_policy` resource instead of inline `access_policy` dynamic block.
   #
   # Since access_policy can be configured both inline and via the separate `azurerm_key_vault_access_policy` resource,
   # we have to explicitly set it to empty slice ([]) to remove it.
