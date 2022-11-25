@@ -17,14 +17,19 @@ variable "configuration" {
   default     = null
 }
 
-# This `name` variable is replaced by the use of `system_name` and `environment` variables.
-# variable "name" {
-#   description = "(Required) The name which should be used for this resource. Changing this forces a new resource to be created."
-#   type        = string
-# }
+variable "system_short_name" {
+  description = <<EOT
+  (Required) Short abbreviation (to-three letters) of the system name that this resource belongs to (see naming convention guidelines).
+  Will be part of the final name of the deployed resource.
+  EOT
+  type        = string
+}
 
-variable "system_name" {
-  description = "(Required) The systen name which should be used for this resource. Changing this forces a new resource to be created."
+variable "app_name" {
+  description = <<EOT
+  (Required) Name of this resource within the system it belongs to (see naming convention guidelines).
+  Will be part of the final name of the deployed resource.
+  EOT
   type        = string
 }
 
